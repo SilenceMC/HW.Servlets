@@ -1,17 +1,19 @@
 package ru.netology.repository;
 
+import org.springframework.stereotype.Repository;
 import ru.netology.model.Post;
 
 import java.util.*;
 
 // Stub
+@Repository
 public class PostRepository {
 
     private long idCounter;
     private final Map<Long, Post> posts = new HashMap<>();
 
     public List<Post> all() {
-        return posts.values().stream().toList();
+        return new ArrayList<>(posts.values());
     }
 
     public Optional<Post> getById(long id) {
@@ -24,7 +26,6 @@ public class PostRepository {
                 ++idCounter;
             }
             post.setId(idCounter);
-            save(post);
         }
         posts.put(post.getId(), post);
         return post;
